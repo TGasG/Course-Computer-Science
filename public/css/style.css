@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Lemon&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+nav {
+    height: 7rem;
+    background-color: #000000;
+}
+
+.container-fluid {
+    padding: 1rem 4.75rem;
+    background-color: #000000;
+}
+
+.navbar-brand {
+    font-family: 'Lemon', cursive;
+    font-size: 1.5rem;
+}
+
+.navbar-collapse {
+    display: flex;
+    justify-content: end;
+}
+
+.nav-link {
+    font-size: 0.875rem;
+}
+
+.navbar-nav {
+    align-items: center;
+}
+
+.navbar-nav li {
+    margin-right: 2rem;
+}
+
+.nav-item .btn {
+    padding: 0;
+    width: 3.75rem;
+    height: 1.74125rem;
+}

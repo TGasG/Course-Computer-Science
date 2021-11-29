@@ -1,0 +1,106 @@
+.register_body {
+    padding-top: 7rem;
+}
+
+.register_body svg {
+    position: absolute;
+    z-index: -1;
+}
+
+.register_isi .register_gambar h1 {
+    margin-top: 0px;
+    padding-left: 5rem;
+}
+
+.register_isi .register_gambar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    padding-top: 29px;
+}
+
+.register_isi {
+    padding-top: 46px;
+    display: flex;
+}
+
+.register_isi .register_form {
+    width: 570px;
+    min-height: 620px;
+    background-color: #3a18c2;
+    display: flex;
+    flex-direction: column;
+    padding: 67px 2.821rem;
+    padding-bottom: 0;
+    overflow: hidden;
+    align-items: center;
+    border-radius: 5px;
+    margin-left: 74px;
+}
+
+.register_isi .register_form input {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    border: 0;
+    margin-top: 30px;
+    padding-left: 15px;
+}
+
+.register_isi .register_form select {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    border: 0;
+    margin-top: 30px;
+    padding-left: 15px;
+}
+
+.register_isi .register_form button {
+    width: 216px;
+    height: 50.3px;
+    border-radius: 5px;
+    border: 0;
+    margin-top: 30px;
+}
+
+.register_isi .register_form p a {
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+.register_isi .register_form p {
+    font-weight: normal;
+}
+
+.footer {
+    height: 142px;
+    padding-top: 69px;
+}
+
+.footer p span {
+    display: block;
+    background-color: black;
+    width: 100%;
+    height: 1px;
+}
+
+.footer .footer-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 46px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.footer .footer-text .logo-footer {
+    padding-top: 0.8rem;
+}
+
+.footer .footer-text .logo-footer img {
+    margin-left: 0.8rem;
+    cursor: pointer;
+}
