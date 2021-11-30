@@ -4,30 +4,8 @@ section {
     padding-top: 7rem;
 }
 
-.login {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.login-left {
-    display: flex;
-    align-items: center;
-    padding-top: 79px;
-    flex-direction: column;
-}
-
-.login-left h1 {
-    padding-left: 73px;
-    padding-bottom: 70px;
-}
-
-.form-login {
-    width: 35rem;
-    height: 35rem;
-    background-color: #3a18c2;
-    margin-top: 50px;
-    border-radius: 20px;
-    padding: 3.8125rem 2.75rem;
+input, button {
+    min-height: 2.875rem;
 }
 
 .vector {
@@ -35,73 +13,22 @@ section {
     z-index: -1;
 }
 
-.form-email input {
-    width: 482px;
-    height: 46px;
-    border-radius: 5px;
+.form-container {
+    border-radius: 12px;
+    max-width: 35.625rem;
+    height: 35.4375rem;
+    background-color: #3A18C2;
+    padding: 3.8125rem 2.75rem;
 }
 
-.form-pass input {
-    width: 482px;
-    height: 46px;
-    border-radius: 5px;
-}
-
-.btn-login button {
-    width: 216px;
-    height: 46px;
-    border-radius: 8px;
-    border: 0;
-}
-
-.btn-login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 50px;
-}
-
-.regis {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 35px;
-}
-
-.regis a {
+.forgot {
     text-decoration: none;
-    font-weight: bold;
-    color: #000;
 }
 
-/* footer */
-
-.footer {
-    height: 142px;
-    padding-top: 69px;
+.login {
+    width: 35.76%;
 }
 
-.footer p span {
-    display: block;
-    background-color: black;
-    width: 100%;
-    height: 1px;
-}
-
-.footer .footer-text {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-top: 46px;
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
-.footer .footer-text .logo-footer {
-    padding-top: 0.8rem;
-}
-
-.footer .footer-text .logo-footer img {
-    margin-left: 0.8rem;
-    cursor: pointer;
+.text-12 {
+    font-size: 12px;
 }

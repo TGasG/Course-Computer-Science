@@ -29,8 +29,14 @@ class User extends Migration
             'phone' => [
                 'type' => 'VARCHAR',
                 'constraint' => '14',
+                'unique' => true,
             ],
             "role ENUM('student', 'mentor') NOT NULL",
+            'picture' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'null' => true,
+            ],
             'createdAt DATETIME NOT NULL DEFAULT(NOW())',
             'updatedAt DATETIME NOT NULL DEFAULT(NOW())',
         ]);

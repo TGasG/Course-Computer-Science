@@ -41,3 +41,13 @@ nav {
     width: 3.75rem;
     height: 1.74125rem;
 }
+
+footer {
+    height: 4.4375rem;
+    border-top: solid rgb(0, 0, 0, 0.4) 2px;
+    padding: 0.625rem 3.125rem;
+}
+
+footer p {
+    margin: 0;
+}
