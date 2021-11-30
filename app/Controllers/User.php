@@ -10,9 +10,9 @@ use App\Models\RegisterModel;
 class User extends BaseController
 {
 
-    protected $userModel;
-    protected $courseModel;
-    protected $registerModel;
+    protected UserModel $userModel;
+    protected CourseModel $courseModel;
+    protected RegisterModel $registerModel;
 
     public function __construct()
     {
@@ -46,7 +46,6 @@ class User extends BaseController
                 ->findAll();
         }
 
-        dd($data);
         return view('/user/profile', $data);
     }
 
@@ -119,10 +118,7 @@ class User extends BaseController
         ]);
 
         // Validasi input
-        if (!$register_validation) {
-            $validation = \Config\Services::validation();
-            return redirect()->to(base_url('/user/register'))->withInput()->with('validation', $validation);
-        }
+        if (!$register_validation) return redirect()->to(base_url('/user/register'))->withInput();
 
         // Hash Password
         $hashPassword = password_hash($this->request->getVar('password'), PASSWORD_ARGON2I);

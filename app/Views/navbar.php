@@ -33,6 +33,15 @@
                     </ul>
                 </li>
                 <?php if (isset($user)) : ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="<?= $user['picture'] ?>" alt="<?= $user['name'] ?>" class="profile-icon">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="<?= base_url('/user/profile') ?>">Akun</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('/user/logout') ?>">Keluar</a></li>
+                        </ul>
+                    </li>
                 <?php else : ?>
                     <li class="nav-item">
                         <a class="btn btn-light" href="<?= base_url('/user/login') ?>">Login</a>

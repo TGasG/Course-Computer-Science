@@ -3,22 +3,22 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use CodeIgniter\Database\BaseConnection;
+use App\Models\CourseModel;
 
 class Course extends BaseController
 {
 
-    protected BaseConnection $db;
+    protected CourseModel $courseModel;
 
     public function __construct()
     {
-        $this->db = \Config\Database::connect();
+        $this->courseModel = new CourseModel();
     }
 
     public function index()
     {
         $data = [
-            'courses' => $this->db->table('course')->select((['id', 'title', 'description', 'thumbnail']))->get()->getResultArray(),
+            'courses' => $this->courseModel->select(['id', 'title', 'description', 'thumbnail'])->findAll(),
         ];
 
         dd($data);

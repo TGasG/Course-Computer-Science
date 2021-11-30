@@ -42,7 +42,18 @@ nav {
     height: 1.74125rem;
 }
 
+.profile-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+}
+
+.dropdown-menu li {
+    margin-right: 0;
+}
+
 footer {
+    margin-top: 4.4375rem;
     height: 4.4375rem;
     border-top: solid rgb(0, 0, 0, 0.4) 2px;
     padding: 0.625rem 3.125rem;
