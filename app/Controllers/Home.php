@@ -2,32 +2,34 @@
 
 namespace App\Controllers;
 
-use App\Models\CourseModel;
-
 class Home extends BaseController
 {
-
-    protected $courseModel;
-
-    public function __construct()
-    {
-        $this->courseModel = new CourseModel();
-    }
-
     public function index()
     {
+        $user = $this->user;
         $courses = $this->courseModel->select(['id', 'title', 'description', 'thumbnail'])->orderBy('createdAt')->findAll(3);
 
         // Berikan placeholder untuk course yang tidak memiliki thumbnail
         $courses = array_map(function ($course) {
-            if ($course['thumbnail'] === null) $course['thumbnail'] = 'thumbnail-placeholder.png';
+            if ($course['thumbnail'] === null) $course['thumbnail'] = '/img/thumbnail-placeholder.png';
             return $course;
         }, $courses);
 
         $data = [
-            'user' => $this->session->get('user'),
+            'user' => $user,
             'courses' => $courses,
+            'error' => $this->session->getFlashdata('registerError'),
         ];
+
+        // Jika user student
+        if ($user !== null && $user['role'] === 'student') {
+            $registeredCourses = $this->registerModel->where('studentId', $user['id'])->findColumn('courseId');
+
+            $data['courses'] = array_map(function ($course) use ($registeredCourses) {
+                $course['isRegistered'] = !(array_search($course['id'], $registeredCourses) === false);
+                return $course;
+            }, $data['courses']);
+        }
 
         return view('home', $data);
     }

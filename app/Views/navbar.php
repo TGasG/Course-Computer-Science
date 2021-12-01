@@ -12,24 +12,61 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Course</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Riwayat
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
+                <?php if (isset($user)) : ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Riwayat
+                        </a>
+                        <?php if ($user['role'] === 'student') : ?>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <?php foreach ($user['registeredCourses'] as $course) : ?>
+                                    <li class="history"><a class="dropdown-item px-2" href="<?= base_url('/course/' . $course['id']) ?>">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div><img class="history-img me-3" src="<?= $course['thumbnail'] ?>" alt="<?= $course['title'] ?>"></div>
+                                                <p class="mb-0 h-100 text-wrap text-decoration-underline" style="font-weight: 600;">
+                                                    Anda telah mendaftar di course <?= $course['title'] ?>
+                                                </p>
+                                            </div>
+                                        </a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php else : ?>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <?php foreach ($user['courses'] as $course) : ?>
+                                    <li class="history"><a class="dropdown-item px-2" href="<?= base_url('/course/' . $course['id']) ?>">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div><img class="history-img me-3" src="<?= $course['thumbnail'] ?>" alt="<?= $course['title'] ?>"></div>
+                                                <p class="mb-0 h-100 text-wrap text-decoration-underline" style="font-weight: 600;">
+                                                    Anda menambahkan <?= $course['title'] ?>
+                                                </p>
+                                            </div>
+                                        </a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Kontak
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li class="kontak">
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center kontak-container">
+                                    <img class="kontak-icon me-3" src="/img/instagram.svg" alt="instagram">
+                                    <p class="mb-0">Instagram</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="kontak">
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center kontak-container">
+                                    <img class="kontak-icon me-3" src="/img/gmail.svg" alt="instagram">
+                                    <p class="mb-0">Email</p>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <?php if (isset($user)) : ?>

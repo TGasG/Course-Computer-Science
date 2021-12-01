@@ -52,6 +52,31 @@ nav {
     margin-right: 0;
 }
 
+.history {
+    width: 19.875rem;
+    height: 5.4375rem;
+}
+
+.history-img {
+    width: 5.3125rem;
+    height: 4.0625rem;
+}
+
+.kontak {
+    text-decoration: underline;
+    font-size: 0.625rem;
+}
+
+.kontak-container {
+    width: 7.5625rem;
+    height: 3.15625rem;
+}
+
+.kontak-icon {
+    width: 1.625rem;
+    height: 1.625rem;
+}
+
 footer {
     margin-top: 4.4375rem;
     height: 4.4375rem;

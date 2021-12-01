@@ -2,28 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
-use App\Models\UserModel;
-use App\Models\CourseModel;
-use App\Models\RegisterModel;
-
 class User extends BaseController
 {
-
-    protected UserModel $userModel;
-    protected CourseModel $courseModel;
-    protected RegisterModel $registerModel;
-
-    public function __construct()
-    {
-        $this->userModel = new UserModel();
-        $this->courseModel = new CourseModel();
-        $this->registerModel = new RegisterModel();
-    }
-
     public function index()
     {
-        $user = $this->session->get('user');
+        $user = $this->user;;
 
         if ($user === null) {
             $_SESSION['error'] = 'Please login first';
@@ -52,7 +35,7 @@ class User extends BaseController
     public function register()
     {
         // Redirect jika google sudah terautentikasi
-        if ($this->session->get('user') !== null) return redirect()->to(base_url('/'));
+        if ($this->user !== null) return redirect()->to(base_url('/'));
 
         $data = [
             'validation' => \Config\Services::validation()
@@ -133,7 +116,7 @@ class User extends BaseController
         ]);
 
         // Set flashdata for login
-        $_SESSION['registered'] = 'You\'re now registered you can login';
+        $_SESSION['registered'] = 'Kamu sudah terdaftar silahkan login';
         $this->session->markAsFlashdata('registered');
 
         // Redirect to login
@@ -143,7 +126,7 @@ class User extends BaseController
     public function login()
     {
         // Redirect jika google sudah terautentikasi
-        if ($this->session->get('user') !== null) return redirect()->to(base_url('/'));
+        if ($this->user !== null) return redirect()->to(base_url('/'));
 
         // Dapatkan flash message
         $data = [
@@ -160,7 +143,7 @@ class User extends BaseController
 
         // Jika user belom terdaftar
         if (!isset($user)) {
-            $_SESSION['error'] = 'Email ' . $this->request->getVar('email') . ' not registered';
+            $_SESSION['error'] = 'Email ' . $this->request->getVar('email') . ' tidak terdaftar';
             $this->session->markAsFlashdata('error');
             return redirect()->to(base_url('/user/login'))->withInput();
         }
@@ -168,7 +151,7 @@ class User extends BaseController
         // Jika password salah
         $result = password_verify($this->request->getVar('password'), $user['password']);
         if (!$result) {
-            $_SESSION['error'] = 'Password incorrect';
+            $_SESSION['error'] = 'Password salah';
             $this->session->markAsFlashdata('error');
             return redirect()->to(base_url('/user/login'))->withInput();
         }

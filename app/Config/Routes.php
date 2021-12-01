@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->post('/user/register', 'User::registerHandler');
 $routes->post('/user/login', 'User::loginHandler');
+$routes->post('/register/new', 'Register::registerHandler');
 
 /*
  * --------------------------------------------------------------------
