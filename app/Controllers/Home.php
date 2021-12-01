@@ -7,7 +7,7 @@ class Home extends BaseController
     public function index()
     {
         $user = $this->user;
-        $courses = $this->courseModel->select(['id', 'title', 'description', 'thumbnail'])->orderBy('createdAt')->findAll(3);
+        $courses = $this->courseModel->select(['id', 'title', 'description', 'thumbnail'])->orderBy('createdAt', 'DESC')->findAll(3);
 
         // Berikan placeholder untuk course yang tidak memiliki thumbnail
         $courses = array_map(function ($course) {

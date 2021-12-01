@@ -69,7 +69,7 @@ class BaseController extends Controller
                 ->join('course c', 'course c on register.courseId = c.id')
                 ->join('user u', 'c.author = u.id')
                 ->where('register.studentId', $this->user['id'])
-                ->orderBy('register.createdAt')
+                ->orderBy('register.createdAt', 'DESC')
                 ->limit(5)
                 ->findAll();
 
@@ -82,7 +82,7 @@ class BaseController extends Controller
                 ->courseModel
                 ->select(['id', 'title', 'thumbnail'])
                 ->where('author', $this->user['id'])
-                ->orderBy('createdAt')
+                ->orderBy('createdAt', 'DESC')
                 ->limit(5)
                 ->findAll();
 
