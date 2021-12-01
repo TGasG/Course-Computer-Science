@@ -1,0 +1,43 @@
+section {
+    padding-top: 7rem;
+}
+
+.judulCourse {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 6.063rem;
+}
+
+.judulCourse h1 {
+    padding-top: 6.25;
+    font-weight: 700;
+    font-size: 40px;
+}
+.judulCourse svg {
+    margin-top: 1.063rem;
+}
+
+.judulCourse iframe {
+    margin-top: 4.188rem;
+}
+
+.deskripsiCourse {
+    padding-top: 3.188rem;
+    padding-left: 10rem;
+}
+
+.deskripsiCourse h1 {
+    font-weight: 700;
+    font-size: 40px;
+}
+
+.deskripsiCourse h3 {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #737373;
+    padding-top: 3.125rem;
+    width: 56.25rem;
+    text-align: justify;
+}
