@@ -74,7 +74,6 @@
                                     </button>
                                 <?php else : ?>
                                     <form action="<?= base_url('/register/new') ?>" method="post">
-                                        <input type="hidden" name="studentId" value="<?= $user['id'] ?>">
                                         <input type="hidden" name="courseId" value="<?= $course['id'] ?>">
                                         <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
                                         <button type="submit" id="daftar">Daftar</button>

@@ -6,33 +6,35 @@ class Register extends BaseController
 {
     public function registerHandler()
     {
+        $user = $this->user;
+
+        // Jika user tidak terautentikasi ke halaman login
+        if ($user === null) return redirect()->to(base_url('/user/login'));
+
+        // Jika user bukan student
+        if ($user['role'] !== 'student') {
+            $_SESSION['error'] = 'Hanya student yang dapat mendaftar course.';
+            $this->session->markAsFlashdata('error');
+            return redirect()->to(base_url('/'));
+        }
+
         // Dapatkan variable
-        $studentId = $this->request->getVar('studentId');
         $courseId = $this->request->getVar('courseId');
 
-        $user = $this->userModel->find($studentId);
-
         // Jika sudah pernah terdaftar
-        $registeredCourse = $this->registerModel->where('studentId', 1)->where('courseId', 1)->first();
+        $registeredCourse = $this->registerModel->where('studentId', $user['id'])->where('courseId', $courseId)->first();
         if ($registeredCourse !== null) {
             $_SESSION['error'] = 'Kamu sudah pernah terdaftar';
             $this->session->markAsFlashdata('error');
             return redirect()->to(base_url('/'));
         }
 
-        // Jika mentor jangan didaftarkan
-        if ($user['role'] === 'mentor') {
-            $_SESSION['error'] = 'Mentor tidak dapat mendaftar course';
-            $this->session->markAsFlashdata('error');
-            return redirect()->to(base_url('/'));
-        }
-
         // Insert pendaftaran
         $this->registerModel->insert([
-            'studentId' => $studentId,
+            'studentId' => $user['id'],
             'courseId' => $courseId,
         ]);
 
-        return redirect()->to(base_url('/course/'.$courseId));
+        return redirect()->to(base_url('/course/' . $courseId));
     }
 }
