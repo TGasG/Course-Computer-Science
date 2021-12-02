@@ -80,7 +80,7 @@ class BaseController extends Controller
         } else if ($this->user !== null && $this->user['role'] === 'mentor') {
             $this->user['courses'] = $this
                 ->courseModel
-                ->select(['id', 'title', 'thumbnail'])
+                ->select(['id', 'title', 'thumbnail', 'description'])
                 ->where('author', $this->user['id'])
                 ->orderBy('createdAt', 'DESC')
                 ->limit(5)

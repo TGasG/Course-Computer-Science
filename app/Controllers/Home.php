@@ -18,7 +18,8 @@ class Home extends BaseController
         $data = [
             'user' => $user,
             'courses' => $courses,
-            'error' => $this->session->getFlashdata('registerError'),
+            'error' => $this->session->getFlashdata('error'),
+            'delete_success' => $this->session->getFlashdata('delete_success'),
         ];
 
         // Jika user student

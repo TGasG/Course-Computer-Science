@@ -123,4 +123,36 @@ class Course extends BaseController
 
         return redirect()->to(base_url('/'));
     }
+
+    public function deleteCourse($id)
+    {
+        $user = $this->user;
+
+        // Jika user tidak terauntentikasi
+        if ($user === null) return redirect() - to(base_url('/user/login'));
+
+        $course = $this->courseModel->find($id);
+
+        // Jika course tidak ditemukan
+        if ($course === null) {
+            $_SESSION['error'] = 'Course tidak ditemukan.';
+            $this->session->markAsFlashdata('error');
+            return redirect()->to(base_url('/'));
+        }
+
+        // Jika user bukan pemilik course
+        if ($course['author'] !== $user['id']) {
+            $_SESSION['error'] = 'Anda tidak memiliki izin untuk mendelete course ini.';
+            $this->session->markAsFlashdata('error');
+            return redirect()->to(base_url('/'));
+        }
+
+        if ($course['thumbnail'] !== null) unlink(substr($course['thumbnail'], 1));
+
+        $this->courseModel->delete($course['id']);
+
+        $_SESSION['delete_success'] = 'Course berhasil di delete.';
+        $this->session->markAsFlashdata('delete_success');
+        return redirect()->to(base_url('/'));
+    }
 }

@@ -46,7 +46,7 @@
         font-weight: 500;
     }
 
-    button {
+    .btn-submit {
         border-radius: 37px !important;
         height: 2.7rem;
         width: 7.45rem;
@@ -67,9 +67,6 @@
         <div class="mb-5 w-100 d-flex justify-content-center">
             <img id="imageThumbnail" class="thumbnail" src="/img/add-course.svg" alt="thumbnail">
             <input id="thumbnailInput" type="file" name="thumbnail" accept="image/png, image/jpeg, image/jpeg" hidden>
-            <div class="invalid-feedback">
-                <?= $validation->getError('thumbnail') ?>
-            </div>
         </div>
         <div class="mb-5 w-100">
             <label for="titleInput" class="form-label">Judul Course</label>
@@ -98,13 +95,17 @@
                 <?= $validation->getError('video') ?>
             </div>
         </div>
-        <button type="submit" class="btn btn-outline-primary">Submit</button>
+        <button type="submit" class="btn-submit btn btn-outline-primary">Submit</button>
     </form>
 </section>
 <?= $this->include('footer') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('script') ?>
+<?php
+$img_error = $validation->getError('thumbnail');
+if ($img_error != null) echo "<script>alert('$img_error');</script>"
+?>
 <script>
     const image = document.getElementById('imageThumbnail');
     const fileInput = document.getElementById('thumbnailInput');
