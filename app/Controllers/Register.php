@@ -21,6 +21,14 @@ class Register extends BaseController
         // Dapatkan variable
         $courseId = $this->request->getVar('courseId');
 
+        // Check apakah course ada
+        $course = $this->courseModel->find($courseId);
+        if ($course === null) {
+            $_SESSION['error'] = 'Course dengan ID ' . $courseId . ' tidak ditemukan.';
+            $this->session->markAsFlashdata('error');
+            return redirect()->to(base_url('/'));
+        }
+
         // Jika sudah pernah terdaftar
         $registeredCourse = $this->registerModel->where('studentId', $user['id'])->where('courseId', $courseId)->first();
         if ($registeredCourse !== null) {
