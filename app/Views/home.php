@@ -43,7 +43,7 @@
                                     <h1><?= $course['title'] ?></h1>
                                     <h3><?= $course['description'] ?></h3>
                                     <div class="d-flex w-100 justify-content-between align-items-center">
-                                        <button onclick="window.location.href = '<?= base_url('/course/edit' . $course['id']) ?>'">
+                                        <button onclick="window.location.href = '<?= base_url('/course/edit/' . $course['id']) ?>'">
                                             Edit Course
                                         </button>
                                         <form action="<?= base_url('/course/delete/' . $course['id']) ?>" method="post">

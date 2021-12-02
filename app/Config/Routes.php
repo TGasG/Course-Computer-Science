@@ -38,6 +38,9 @@ $routes->post('/register/new', 'Register::registerHandler');
 $routes->get('/course/(:num)', 'Course::courseView/$1');
 $routes->post('/course/add', 'Course::addCourse');
 $routes->delete('/course/delete/(:num)', 'Course::deleteCourse/$1');
+$routes->get('/course/edit/(:num)', 'Course::updateView/$1');
+$routes->put('/course/edit/(:num)', 'Course::updateCourse/$1');
+
 
 /*
  * --------------------------------------------------------------------
