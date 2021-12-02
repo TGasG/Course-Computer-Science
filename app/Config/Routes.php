@@ -36,6 +36,7 @@ $routes->post('/user/register', 'User::registerHandler');
 $routes->post('/user/login', 'User::loginHandler');
 $routes->post('/register/new', 'Register::registerHandler');
 $routes->get('/course/(:num)', 'Course::courseView/$1');
+$routes->post('/course/add', 'Course::addCourse');
 
 /*
  * --------------------------------------------------------------------
