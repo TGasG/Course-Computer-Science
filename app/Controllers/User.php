@@ -18,6 +18,8 @@ class User extends BaseController
             'validation' => \Config\Services::validation(),
             'from' => $this->session->getFlashdata('from'),
             'success_account' => $this->session->getFlashdata('success_account'),
+            'success_keamanan' => $this->session->getFlashdata('success_keamanan'),
+            'error_keamanan' => $this->session->getFlashdata('error_keamanan'),
         ];
 
         if ($user['role'] === 'mentor') {
@@ -174,7 +176,7 @@ class User extends BaseController
 
     public function logout()
     {
-        $this->session->remove('user');
+        $this->session->remove('userId');
         return redirect()->to(base_url('/'));
     }
 
@@ -250,7 +252,62 @@ class User extends BaseController
 
     public function editPassword()
     {
-        // TODO
+        if ($this->user === null) return redirect()->to(base_url('/user/login'));
+        $user = $this->userModel->find($this->user['id']);
+
+        // Persiapkan validasi update password
+        $update_validation = $this->validate([
+            'password' => [
+                'rules' => 'required|min_length[8]|max_length[255]',
+                'errors' => [
+                    'required' => '{field} harus diisi.',
+                    'min_length' => '{field} harus berisi minimal 8 karakter.',
+                    'max_length' => '{field} maksimal berisi 255 karakter.',
+                ],
+            ],
+            'repeat_password' => [
+                'rules' => 'required|matches[password]|min_length[8]|max_length[255]',
+                'errors' => [
+                    'required' => 'Confirm Password harus diisi.',
+                    'matches' => 'Confirm Password tidak sama dengan Password',
+                    'min_length' => 'Confirm Password harus berisi minimal 8 karakter.',
+                    'max_length' => 'Confirm Password maksimal berisi 255 karakter.',
+                ]
+            ],
+        ]);
+
+        // Validasi update password
+        if (!$update_validation) {
+            $_SESSION['from'] = 'keamanan';
+            $this->session->markAsFlashdata('from');
+            return redirect()->to(base_url('/user'))->withInput();
+        }
+
+        // Jika password salah
+        $result = password_verify($this->request->getVar('old_password'), $user['password']);
+        if (!$result) {
+            $_SESSION['from'] = 'keamanan';
+            $this->session->markAsFlashdata('from');
+            $_SESSION['error_keamanan'] = 'Password salah';
+            $this->session->markAsFlashdata('error_keamanan');
+            return redirect()->to(base_url('/user'))->withInput();
+        }
+
+        // Hash Password
+        $hashed_password = password_hash($this->request->getVar('password'), PASSWORD_ARGON2I);
+
+        $this->userModel->save([
+            'id' => $user['id'],
+            'password' => $hashed_password,
+        ]);
+
+        // Flash message berhasil
+        $_SESSION['from'] = 'keamanan';
+        $this->session->markAsFlashdata('from');
+        $_SESSION['success_keamanan'] = 'Password berhasil diupdate.';
+        $this->session->markAsFlashdata('success_keamanan');
+
+        return redirect()->to(base_url('/user'));
     }
 
     public function editPicture()

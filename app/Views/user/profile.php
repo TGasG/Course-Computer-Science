@@ -82,6 +82,20 @@
                          class="dynamic w-100 h-100 d-flex flex-column align-items-center <?= $from === 'keamanan' ? '' : 'hide' ?>">
                         <form class="w-100 d-flex flex-column" action="<?= base_url('/user/edit/password') ?>"
                               method="post">
+                            <?php if (isset($success_keamanan)) : ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?= $success_keamanan ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
+                            <?php if (isset($error_keamanan)) : ?>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <?= $error_keamanan ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
                             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>"/>
                             <input type="hidden" name="_method" value="PUT">
                             <div class="mb-3">
@@ -91,13 +105,23 @@
                             </div>
                             <div class="mb-3">
                                 <label for="passwordInput" class="form-label">Sandi Baru</label>
-                                <input id="passwordInput" type="password" class="form-control" name="password"
+                                <input id="passwordInput" type="password"
+                                       class="form-control <?= ($validation->hasError('password')) ? 'is-invalid' : '' ?>"
+                                       name="password"
                                        minlength="8" maxlength="255">
+                                <div class="invalid-feedback">
+                                    <?= $validation->getError('password') ?>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="confirmPassword" class="form-label">Konfirmasi Sandi</label>
-                                <input id="confirmPassword" type="password" class="form-control" name="repeat_password"
+                                <input id="confirmPassword" type="password"
+                                       class="form-control <?= ($validation->hasError('repeat_password')) ? 'is-invalid' : '' ?>"
+                                       name="repeat_password"
                                        minlength="8" maxlength="255">
+                                <div class="invalid-feedback">
+                                    <?= $validation->getError('repeat_password') ?>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-outline-primary submit align-self-end">Submit</button>
                         </form>
