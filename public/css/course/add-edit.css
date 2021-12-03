@@ -1,0 +1,51 @@
+section {
+    padding-top: 11.9375rem;
+}
+
+.subtitle {
+    color: #737373;
+    font-size: 14px;
+}
+
+.red-line {
+    display: block;
+    height: 7px;
+    width: 11.5rem;
+    background-color: #E74040;
+}
+
+.thumbnail {
+    width: 20.65rem;
+    height: 9.9rem;
+}
+
+.thumbnail:hover {
+    cursor: pointer;
+}
+
+form {
+    width: 44.1rem;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    border-radius: 25px !important;
+    height: 5rem;
+    background-color: #F0F0F0 !important;
+}
+
+input[type=text] {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.btn-submit {
+    border-radius: 37px !important;
+    height: 2.7rem;
+    width: 7.45rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+}

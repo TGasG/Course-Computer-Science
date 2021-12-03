@@ -209,18 +209,7 @@ section {
 }
 
 .cardCourse .cardCourseText button {
-    height: 44px;
-    border: 1px solid #23a6f0;
-    color: #23a6f0;
-    border-radius: 20px;
     margin: 1.5rem 0.5rem 0;
-    background-color: #ffffff;
-    cursor: pointer;
-}
-
-.hapus-course {
-    color: #F55555 !important;
-    border: 1px solid #F55555 !important;
 }
 
 .cardCourse .cardCourseText .belajar {
@@ -233,4 +222,30 @@ section {
     margin-left: 10px;
     margin-top: 22px;
     display: none;
+}
+
+.daftar-belajar {
+    border-radius: 37px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    padding: 0.625rem 1.25rem;
+    color: #23A6F0;
+    border-color: #23A6F0 !important;
+}
+
+.daftar-belajar:hover {
+    background-color: #23A6F0 !important;
+}
+
+.hapus-course {
+    border-radius: 37px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    padding: 0.625rem 1.25rem;
+    color: #F55555;
+    border-color: #F55555 !important;
+}
+
+.hapus-course:hover {
+    background-color: #F55555;
 }

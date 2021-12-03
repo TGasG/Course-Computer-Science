@@ -26,7 +26,7 @@ class Home extends BaseController
         if ($user !== null && $user['role'] === 'student') {
             $registeredCourses = $this->registerModel->where('studentId', $user['id'])->findColumn('courseId') ?? [];
 
-            if ($registeredCourses !== null) $data['courses'] = array_map(function ($course) use ($registeredCourses) {
+            $data['courses'] = array_map(function ($course) use ($registeredCourses) {
                 $course['isRegistered'] = !(array_search($course['id'], $registeredCourses) === false);
                 return $course;
             }, $data['courses']);

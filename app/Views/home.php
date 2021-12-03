@@ -37,19 +37,24 @@
                     <div class="parentCard parent-card-mentor">
                         <?php foreach ($user['courses'] as $course) : ?>
                             <div class="cardCourse bg-white">
-                                <img class='thumbnail' src="<?= $course['thumbnail'] ?>" alt="pemrograman web">
+                                <a href="<?= base_url('/course/' . $course['id']) ?>">
+                                    <img class='thumbnail' src="<?= $course['thumbnail'] ?>" alt="pemrograman web">
+                                </a>
                                 <div class="cardCourseText">
                                     <p>Bahasa Indonesia</p>
                                     <h1><?= $course['title'] ?></h1>
                                     <h3><?= $course['description'] ?></h3>
                                     <div class="d-flex w-100 justify-content-between align-items-center">
-                                        <button onclick="window.location.href = '<?= base_url('/course/edit/' . $course['id']) ?>'">
+                                        <button class="btn-outline-primary btn daftar-belajar"
+                                                onclick="window.location.href = '<?= base_url('/course/edit/' . $course['id']) ?>'">
                                             Edit Course
                                         </button>
-                                        <form action="<?= base_url('/course/delete/' . $course['id']) ?>" method="post">
-                                            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>"/>
+                                        <form action="<?= base_url('/course/delete/' . $course['id']) ?>"
+                                              method="post">
+                                            <input type="hidden" name="<?= csrf_token() ?>"
+                                                   value="<?= csrf_hash() ?>"/>
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button class="hapus-course" type="submit"
+                                            <button class="btn btn-outline-danger hapus-course" type="submit"
                                                     onclick="return confirm('Apakah anda yakin ingin menghapus course ini?')">
                                                 Hapus Course
                                             </button>
@@ -133,7 +138,7 @@
                                 <h3><?= $course['description'] ?></h3>
                                 <?php if (isset($user)) : ?>
                                     <?php if ($course['isRegistered']) : ?>
-                                        <button id="daftar"
+                                        <button id="daftar" class="btn-outline-primary btn daftar-belajar"
                                                 onclick="window.location.href = '<?= base_url('/course/' . $course['id']) ?>'">
                                             Belajar
                                         </button>
@@ -141,11 +146,13 @@
                                         <form action="<?= base_url('/register/new') ?>" method="post">
                                             <input type="hidden" name="courseId" value="<?= $course['id'] ?>">
                                             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>"/>
-                                            <button type="submit" id="daftar">Daftar</button>
+                                            <button class="btn-outline-primary btn daftar-belajar" type="submit"
+                                                    id="daftar">Daftar
+                                            </button>
                                         </form>
                                     <?php endif ?>
                                 <?php else : ?>
-                                    <button id="daftar"
+                                    <button id="daftar" class="btn-outline-primary btn daftar-belajar"
                                             onclick="window.location.href = '<?= base_url('/user/login') ?>'">
                                         Daftar
                                     </button>

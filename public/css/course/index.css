@@ -1,0 +1,55 @@
+section {
+    padding: 11.9375rem 5.25rem 0;
+}
+
+.card {
+    border: none;
+    border-radius: 0;
+}
+
+.line {
+    display: block;
+    background-color: #E74040;
+    width: 18.9375rem;
+    height: 7px;
+}
+
+.course {
+    height: 33.75rem;
+    width: 24.6875rem;
+}
+
+.course-img {
+    height: 19.359375rem;
+}
+
+.language {
+    color: #23A6F0;
+    font-weight: bold;
+}
+
+.card-title {
+    font-weight: bold;
+    height: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-text {
+    height: 2.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.daftar-belajar {
+    border-radius: 37px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    padding: 0.625rem 1.25rem;
+    color: #23A6F0;
+    border-color: #23A6F0 !important;
+}
+
+.daftar-belajar:hover {
+    background-color: #23A6F0;
+}

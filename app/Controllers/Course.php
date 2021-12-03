@@ -4,16 +4,59 @@ namespace App\Controllers;
 
 class Course extends BaseController
 {
+    public function index()
+    {
+        $user = $this->user;
+
+        // Jika user adalah mentor
+        if ($user !== null && $user['role'] === 'mentor') {
+            $_SESSION['error'] = 'Anda adalah mentor.';
+            $this->session->markAsFlashdata('error');
+            return redirect()->to(base_url('/'));
+        }
+
+        $courses = $this->courseModel->select(['id', 'title', 'description', 'thumbnail'])->orderBy('createdAt', 'DESC')->findAll();
+        $courses = array_map(function ($course) {
+            $course['thumbnail'] = $course['thumbnail'] ?? '/img/thumbnail-placeholder.png';
+            return $course;
+        }, $courses);
+
+        $data = [
+            'user' => $user,
+            'courses' => $courses,
+        ];
+
+        if ($user !== null) {
+            $registeredCourses = $this->registerModel->where('studentId', $user['id'])->findColumn('courseId') ?? [];
+
+            $data['courses'] = array_map(function ($course) use ($registeredCourses) {
+                $course['isRegistered'] = !(array_search($course['id'], $registeredCourses) === false);
+                return $course;
+            }, $data['courses']);
+        }
+
+        return view('course/index', $data);
+    }
+
     public function courseView($id)
     {
+        $user = $this->user;
+
         if ($this->user === null) return redirect()->to(base_url('/user/login'));
         $id = (int)$id;
 
         $course = $this->courseModel->select(['title', 'author', 'description', 'video',])->find($id);
         if ($course === null) return view('/errors/html/error_404');
 
+        // Jika mentor bukan pemilik video
+        if ($user !== null && $user['role'] === 'mentor' && $user['id'] !== $course['author']) {
+            $_SESSION['error'] = 'Anda bukan pemilik course ini.';
+            $this->session->markAsFlashdata('error');
+            return redirect()->to(base_url('/'));
+        }
+
         $data = [
-            'user' => $this->user,
+            'user' => $user,
             'course' => $course,
         ];
 
