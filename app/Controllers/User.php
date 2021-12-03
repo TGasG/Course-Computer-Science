@@ -20,6 +20,7 @@ class User extends BaseController
             'success_account' => $this->session->getFlashdata('success_account'),
             'success_keamanan' => $this->session->getFlashdata('success_keamanan'),
             'error_keamanan' => $this->session->getFlashdata('error_keamanan'),
+            'success_picture' => $this->session->getFlashdata('success_picture'),
         ];
 
         if ($user['role'] === 'mentor') {
@@ -312,6 +313,42 @@ class User extends BaseController
 
     public function editPicture()
     {
-        // TODO
+        if ($this->user === null) return redirect()->to(base_url('/user/login'));
+        $user = $this->userModel->find($this->user['id']);
+
+        // Validasi gambar
+        if (!$this->validate([
+            'picture' => [
+                'rules' => 'uploaded[picture]|max_size[picture,10240]|is_image[picture]',
+                'errors' => [
+                    'uploaded' => 'gambar kosong.',
+                    'max_size' => 'Ukuran maksimal gambar 10mb',
+                    'is_image' => 'gambar yang anda pilih bukan gambar',
+                ],
+            ],
+        ])) return redirect()->to(base_url('/user'))->withInput();
+
+        // Ambil file
+        $picture_file = $this->request->getFile('picture');
+
+        // Generate random name
+        $picture_name = $picture_file->getRandomName();
+
+        // Masukkan ke folder /upload/thumbnails
+        $picture_file->move('upload/profiles', $picture_name);
+
+        // Hapus gambar lama
+        if ($user['picture'] !== null) unlink(substr($user['picture'], 1));
+
+        $this->userModel->save([
+            'id' => $user['id'],
+            'picture' => "/upload/profiles/$picture_name",
+        ]);
+
+        // Flash message berhasil
+        $_SESSION['success_picture'] = 'Gambar profile berhasil diupdate.';
+        $this->session->markAsFlashdata('success_picture');
+
+        return redirect()->to(base_url('/user'));
     }
 }

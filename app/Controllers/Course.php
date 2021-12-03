@@ -112,11 +112,10 @@ class Course extends BaseController
                 ],
             ],
             'thumbnail' => [
-                'rules' => 'max_size[thumbnail,10240]|is_image[thumbnail]|mime_in[thumbnail,image/jpg,image/jpeg,image/png]',
+                'rules' => 'max_size[thumbnail,10240]|is_image[thumbnail]',
                 'errors' => [
                     'max_size' => 'Ukuran maksimal {field} 10mb',
                     'is_image' => '{field} yang anda pilih bukan gambar',
-                    'mime_in' => '{field} yang anda pilih bukan gambar',
                 ],
             ],
             'video' => [
@@ -277,11 +276,10 @@ class Course extends BaseController
                 ],
             ],
             'thumbnail' => [
-                'rules' => 'max_size[thumbnail,10240]|is_image[thumbnail]|mime_in[thumbnail,image/jpg,image/jpeg,image/png]',
+                'rules' => 'max_size[thumbnail,10240]|is_image[thumbnail]',
                 'errors' => [
                     'max_size' => 'Ukuran maksimal {field} 10mb',
                     'is_image' => '{field} yang anda pilih bukan gambar',
-                    'mime_in' => '{field} yang anda pilih bukan gambar',
                 ],
             ],
             'video' => [
