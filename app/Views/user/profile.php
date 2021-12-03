@@ -105,12 +105,12 @@
                     <?php if ($user['role'] === 'mentor') : ?>
                         <?php if (count($courses) < 1) : ?>
                             <div id="course"
-                                 class="dynamic w-100 h-100 d-flex flex-column align-items-center justify-content-center <?= $from === 'akun' ? '' : 'hide' ?>">
+                                 class="dynamic w-100 h-100 d-flex flex-column align-items-center justify-content-center <?= $from === 'course' ? '' : 'hide' ?>">
                                 <h2 class="fw-bold">Anda Belum Menambahkan Course</h2>
                             </div>
                         <?php else : ?>
                             <div id="course"
-                                 class="dynamic w-100 h-100 d-flex flex-column align-items-center <?= $from === 'akun' ? '' : 'hide' ?>">
+                                 class="dynamic w-100 h-100 d-flex flex-column align-items-center <?= $from === 'course' ? '' : 'hide' ?>">
                                 <div class="row">
                                     <?php foreach ($courses as $course) : ?>
                                         <div class="col mb-5">
@@ -150,12 +150,12 @@
                     <?php else : ?>
                         <?php if (count($registered) < 1) : ?>
                             <div id="course"
-                                 class="dynamic w-100 h-100 d-flex flex-column align-items-center justify-content-center <?= $from === 'akun' ? '' : 'hide' ?>">
+                                 class="dynamic w-100 h-100 d-flex flex-column align-items-center justify-content-center <?= $from === 'course' ? '' : 'hide' ?>">
                                 <h2 class="fw-bold">Anda Belum Mendaftarkan Course</h2>
                             </div>
                         <?php else : ?>
                             <div id="course"
-                                 class="dynamic w-100 h-100 d-flex flex-column align-items-center <?= $from === 'akun' ? '' : 'hide' ?>">
+                                 class="dynamic w-100 h-100 d-flex flex-column align-items-center <?= $from === 'course' ? '' : 'hide' ?>">
                                 <div class="row">
                                     <?php foreach ($registered as $course) : ?>
                                         <div class="col mb-5">
