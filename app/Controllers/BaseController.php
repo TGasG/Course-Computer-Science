@@ -60,7 +60,14 @@ class BaseController extends Controller
         $this->userModel = new UserModel();
         $this->courseModel = new CourseModel();
         $this->registerModel = new RegisterModel();
-        $this->user = \Config\Services::session()->get('user');
+        $userId = \Config\Services::session()->get('userId');
+
+        $this->user = $userId === null ? null : $this->userModel->find($userId);
+
+        if ($this->user !== null) {
+            unset($this->user['password']);
+            $this->user['picture'] = $this->user['picture'] ?? '/img/profile-placeholder.png';
+        }
 
         if ($this->user !== null && $this->user['role'] === 'student') {
             $this->user['registeredCourses'] = $this

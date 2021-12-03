@@ -15,6 +15,9 @@ class User extends BaseController
 
         $data = [
             'user' => $user,
+            'validation' => \Config\Services::validation(),
+            'from' => $this->session->getFlashdata('from'),
+            'success_account' => $this->session->getFlashdata('success_account'),
         ];
 
         if ($user['role'] === 'mentor') {
@@ -165,10 +168,7 @@ class User extends BaseController
         // Berika placeholder untuk user yang tidak memiliki profile picture
         $user['picture'] = $user['picture'] === null ? '/img/profile-placeholder.png' : $user['picture'];
 
-        // Jangan biarkan password ikut terbawa ke session
-        unset($user['password']);
-
-        $this->session->set('user', $user);
+        $this->session->set('userId', $user['id']);
         return redirect()->to(base_url('/'));
     }
 
@@ -176,5 +176,85 @@ class User extends BaseController
     {
         $this->session->remove('user');
         return redirect()->to(base_url('/'));
+    }
+
+    public function editAkun()
+    {
+        $user = $this->user;
+        if ($user === null) return redirect()->to(base_url('/user/login'));
+
+        // Siapkan validasi email
+        $email_validation =
+            $user['email'] === $this->request->getVar('email') ?
+                'required|valid_email|max_length[255]' :
+                'required|valid_email|is_unique[user.email]|max_length[255]';
+
+        // Siapkan validasi phone
+        $phone_validation =
+            $user['phone'] === $this->request->getVar('phone') ?
+                'required|max_length[14]' :
+                'required|is_unique[user.phone]|max_length[14]';
+
+        // Persiapkan validasi update akun
+        $update_validation = $this->validate([
+            'name' => [
+                'rules' => 'required|alpha_space|min_length[3]|max_length[100]',
+                'errors' => [
+                    'required' => '{field} harus diisi.',
+                    'alpha_space' => '{field} hanya dapat menggunakan karakter huruf dan spasi.',
+                    'min_length' => '{field} harus berisi minimal 3 karakter.',
+                    'max_length' => '{field} maksimal berisi 100 karakter.',
+                ],
+            ],
+            'email' => [
+                'rules' => $email_validation,
+                'errors' => [
+                    'required' => '{field} harus diisi.',
+                    'valid_email' => '{field} harus berisi email yang valid.',
+                    'is_unique' => '{field} sudah pernah terdaftar.',
+                    'max_length' => '{field} maksimal berisi 255 karakter.',
+                ],
+            ],
+            'phone' => [
+                'rules' => $phone_validation,
+                'errors' => [
+                    'required' => '{field} harus diisi.',
+                    'is_unique' => '{field} sudah pernah terdaftar.',
+                    'max_length' => '{field} maksimal berisi 14 karakter.',
+                ],
+            ],
+        ]);
+
+        // Validasi Update
+        if (!$update_validation) {
+            $_SESSION['from'] = 'akun';
+            $this->session->markAsFlashdata('from');
+            return redirect()->to(base_url('/user'))->withInput();
+        }
+
+        $this->userModel->save([
+            'id' => $user['id'],
+            'name' => $this->request->getVar('name'),
+            'email' => $this->request->getVar('email'),
+            'phone' => $this->request->getVar('phone'),
+        ]);
+
+        // Flash message berhasil
+        $_SESSION['from'] = 'akun';
+        $this->session->markAsFlashdata('from');
+        $_SESSION['success_account'] = 'Akun berhasil diupdate.';
+        $this->session->markAsFlashdata('success_account');
+
+        return redirect()->to(base_url('/user'));
+    }
+
+    public function editPassword()
+    {
+        // TODO
+    }
+
+    public function editPicture()
+    {
+        // TODO
     }
 }

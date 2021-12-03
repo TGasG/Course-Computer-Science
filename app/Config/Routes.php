@@ -40,7 +40,9 @@ $routes->post('/course/add', 'Course::addCourse');
 $routes->delete('/course/delete/(:num)', 'Course::deleteCourse/$1');
 $routes->get('/course/edit/(:num)', 'Course::updateView/$1');
 $routes->put('/course/edit/(:num)', 'Course::updateCourse/$1');
-
+$routes->put('/user/edit/akun', 'User::editAkun');
+$routes->put('/user/edit/akun', 'User::editPassword');
+$routes->put('/user/edit/picture', 'User::editPicture');
 
 /*
  * --------------------------------------------------------------------
