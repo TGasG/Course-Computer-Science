@@ -1,0 +1,144 @@
+section {
+    padding-top: 8.3125rem;
+}
+
+.img-thumbnail {
+    width: 16.875rem;
+    height: 16.875rem;
+    border-radius: 34.5px;
+}
+
+.left {
+    padding: 1.875rem 0;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    font-size: 1.875rem;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 4rem;
+    margin: 0;
+    padding-left: 3.375rem;
+}
+
+.menu-item:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.active-menu {
+    background-color: #f0f0f0;
+}
+
+.public-profile {
+    height: 8rem;
+    width: 100%;
+    border-bottom: #000 solid 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dynamic {
+    padding: 2.1875rem 4.375rem 0;
+}
+
+.hide {
+    display: none !important;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-control {
+    height: 5rem;
+    border-radius: 25px;
+    background-color: #f0f0f0;
+}
+
+.form-control[type='text'],
+.form-control[type='password'],
+.form-control[type='email'],
+.form-control[type='number'] {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.submit {
+    border-radius: 37px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    padding: 0.625rem 1.25rem;
+    color: #23a6f0;
+    border-color: #23a6f0 !important;
+}
+
+.submit:hover {
+    background-color: #23a6f0;
+}
+
+.card {
+    border: none;
+    border-radius: 0;
+}
+
+.course {
+    height: 33.75rem;
+    width: 20rem;
+}
+
+.course-img {
+    height: 19.359375rem;
+}
+
+.language {
+    color: #23a6f0;
+    font-weight: bold;
+}
+
+.card-title {
+    font-weight: bold;
+    height: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-text {
+    height: 2.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.daftar-belajar {
+    border-radius: 37px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    padding: 0.625rem 1.25rem;
+    color: #23a6f0;
+    border-color: #23a6f0 !important;
+}
+
+.daftar-belajar:hover {
+    background-color: #23a6f0;
+}
+
+.hapus-course {
+    border-radius: 37px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    padding: 0.625rem 1.25rem;
+    color: #f55555;
+    border-color: #f55555 !important;
+}
+
+.hapus-course:hover {
+    background-color: #f55555;
+}

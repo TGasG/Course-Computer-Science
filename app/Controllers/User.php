@@ -22,11 +22,17 @@ class User extends BaseController
         } else {
             $data['registered'] = $this
                 ->registerModel
-                ->select(['register.id as registerId', 'c.title', 'c.description', 'c.thumbnail', 'c.video', 'u.name as author', 'register.createdAt as registerAt'])
+                ->select(['register.id as registerId', 'c.id as courseId', 'c.title', 'c.description', 'c.thumbnail', 'c.video', 'u.name as author', 'register.createdAt as registerAt'])
                 ->join('course c', 'course c on register.courseId = c.id')
                 ->join('user u', 'c.author = u.id')
                 ->where('register.studentId', $user['id'])
+                ->orderBy('register.createdAt', 'DESC')
                 ->findAll();
+
+            $data['registered'] = array_map(function ($course) {
+                $course['thumbnail'] = $course['thumbnail'] ?? '/img/thumbnail-placeholder.png';
+                return $course;
+            }, $data['registered']);
         }
 
         return view('/user/profile', $data);

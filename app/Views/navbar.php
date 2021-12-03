@@ -88,7 +88,7 @@
                             <img src="<?= $user['picture'] ?>" alt="<?= $user['name'] ?>" class="profile-icon">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="<?= base_url('/user/profile') ?>">Akun</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('/user') ?>">Akun</a></li>
                             <li><a class="dropdown-item" href="<?= base_url('/user/logout') ?>">Keluar</a></li>
                         </ul>
                     </li>
